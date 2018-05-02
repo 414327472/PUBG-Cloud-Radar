@@ -257,6 +257,8 @@ const gameState = {
   processPUBGEvent (event) {
     if (!event) {
       return
+  }
+	if(String(event.type).indexOf('PlayerUpdate') < 1 && String(event.type).indexOf('SelfLocEx') < 1 && String(event.type).indexOf('ActorOpen') < 1){
     }
     switch (event.type) {
       case TYPES.SELFLOCEX:
@@ -302,6 +304,10 @@ const gameState = {
         this.processActorClose(event)
         break
       case TYPES.PLAYERUPDATE:
+  //console.log(event.data);
+	  if (event.data.attachedTo != null){
+		  //console.log("pu = " + event.data.attachedTo + " - " + event.guid + " - " + this.meGuid);
+	  }
         if (event.data.attachedTo != null && event.guid === this.meGuid) {
           this.meAttachedTo = event.data.attachedTo
         }
